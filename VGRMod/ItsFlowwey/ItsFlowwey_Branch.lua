@@ -268,69 +268,12 @@ local Joker_Info = {
 SMODS.Sprite:new("VGRMod_Jokers", SMODS.findModByID("VGRMod").path.."ItsFlowwey/", "VGRMod_Jokers.png", 71, 95, "asset_atli"):register()
 G.localization.misc.dictionary.k_grown = "Grown!"
 G.localization.misc.dictionary.k_harvested = "Harvested!"
-G.localization.descriptions.Other['stardew_valley_ref'] = {
-	name = 'Stardew Valley Reference',
-	text = {
-		'This Joker is',
-		'from',
-		'{C:attention}Stardew Valley{}'
-	}
-}
+G.localization.descriptions.Other
 G.localization.misc.dictionary.k_hacked = "Hacked!"
 G.localization.misc.dictionary.k_hand_remaining = "1 Hand Remaining!"
 G.localization.misc.dictionary.k_reenabled = "Re-enabled!"
 G.localization.misc.v_dictionary['backup_active'] = "Active!"
-G.localization.misc.v_dictionary['backup_inactive'] = "#1# blinds remaining"
-G.localization.descriptions.Other['ftl_ref'] = {
-	name = 'FTL Reference',
-	text = {
-		'This Joker is',
-		'from',
-		'{C:spectral}FTL: Faster',
-		'{C:spectral}Than Light{}'
-	}
-}
-G.localization.descriptions.Other['satis_ref'] = {
-	name = 'Satisfactory Reference',
-	text = {
-		'This Joker is',
-		'from',
-		'{C:attention}Satisfactory'
-	}
-}
-G.localization.descriptions.Other['overclock'] = {
-	name = 'Overclock',
-	text = {
-		'This Joker is',
-		'from',
-		'{C:attention}Satisfactory'
-	}
-}
-G.localization.descriptions.Other['dndg_ref'] = {
-	name = 'D&DG Reference',
-	text = {
-		'This Joker is',
-		'from',
-		'{C:attention}Dungeons',
-		'{C:attention}& Degenerate Gamblers'
-	}
-}
 G.localization.misc.dictionary['k_plus_innerve'] = "+1 Debuffed Cards"
-G.localization.descriptions.Other['osfe_ref'] = {
-	name = 'OSFE Reference',
-	text = {
-		'This Joker is a',
-		'from',
-		'{C:attention}One Step',
-		'{C:attention}From Eden'
-	}
-}
-G.localization.descriptions.Other['board_game'] = {
-	name = 'BOARD GAME???',
-	text = {
-		'HOW DID YOU GET HERE?'
-	}
-}
 
 init_localization()
 
