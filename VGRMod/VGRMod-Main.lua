@@ -24,7 +24,66 @@ function SMODS.INIT.VGRMod_Main()
 		end
 	end
 
+	--Add game ref tooltip here
+	local game_ref_list = {
+		stardew_valley_ref = {
+			name = 'Stardew Valley Reference',
+			text = {
+				'This Joker is',
+				'from',
+				'{C:attention}Stardew Valley{}'
+			}
+		},
+		ftl_ref = {
+			name = 'FTL Reference',
+			text = {
+				'This Joker is',
+				'from',
+				'{C:spectral}FTL: Faster',
+				'{C:spectral}Than Light{}'
+			}
+		},
+		satis_ref = {
+			name = 'Satisfactory Reference',
+			text = {
+				'This Joker is',
+				'from',
+				'{C:attention}Satisfactory'
+			}
+		},
+		dndg_ref = {
+			name = 'D&DG Reference',
+			text = {
+				'This Joker is',
+				'from',
+				'{C:attention}Dungeons',
+				'{C:attention}& Degenerate Gamblers'
+			}
+		},
+		osfe_ref = {
+			name = 'OSFE Reference',
+			text = {
+				'This Joker is a',
+				'from',
+				'{C:attention}One Step',
+				'{C:attention}From Eden'
+			}
+		},
+		board_game = {
+			name = 'BOARD GAME???',
+			text = {
+				'HOW DID YOU GET HERE?'
+			}
+		}
+	}
+	local function init_game_ref_tooltips()
+		for k, v in pairs(game_ref_list) do
+			G.localization.descriptions.Other[k] = v
+		end
+	end
+
 	init_jokers()
+	init_game_ref_tooltips()
 
 	-- If your joker has special API, add here
 	-- Code from autumnmood on discord, Joker can_use API
