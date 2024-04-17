@@ -1,2 +1,3 @@
-# Into-the-Jokerverse
-Video game crossover themed mod
+# IntotheJokerverse: Josh's DLC
+
+Video game crossover themed mod, the repository where I work on my cards
