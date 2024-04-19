@@ -1,7 +1,7 @@
 --- STEAMODDED HEADER
 --- MOD_NAME: Into the Jokerverse
 --- MOD_ID: VGRMod
---- MOD_AUTHOR: [ItsFlowwey, Balatro Discord]
+--- MOD_AUTHOR: [ItsFlowwey, JoshDoesStuff, Balatro Discord]
 --- MOD_DESCRIPTION: Video game crossover themed mod
 --- DISPLAY_NAME: Into the Jokerverse
 
@@ -12,7 +12,8 @@ function SMODS.INIT.VGRMod_Main()
 	local VGRMod_File = SMODS.findModByID("VGRMod") --Main VGRMod Path
 	--Add Your Master Lua File here
 	local VGRMod_branches = {
-		'/ItsFlowwey/ItsFlowwey_Branch.lua',
+		-- '/ItsFlowwey/ItsFlowwey_Branch.lua',
+		'JoshDoesStuff/JoshsDLC-branch.lua'
 	}
 
 	local function init_jokers()
@@ -74,8 +75,17 @@ function SMODS.INIT.VGRMod_Main()
 			text = {
 				'HOW DID YOU GET HERE?'
 			}
+		},
+		rd_ref = {
+			name = "Rhythm Doctor Refrence",
+			text = {
+				"This Joker is",
+				"from",
+				"{C:attention}Rhythm Doctor"
+			}
 		}
 	}
+
 	local function init_game_ref_tooltips()
 		for k, v in pairs(game_ref_list) do
 			G.localization.descriptions.Other[k] = v
