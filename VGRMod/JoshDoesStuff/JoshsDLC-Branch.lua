@@ -5,7 +5,17 @@ local jokers_def =  {
             "After every {C:attention}7th{} card played",
             "This card gains {C:chips}+7{} chips",
         }
+    }, 
+    
+    fireAndIce = {
+        ["name"] = "A Dance of Fire and Ice",
+        ["text"] = {
+            "After every {C:attention}7th{} hand played",
+            "This card generates {C:attention}2 planet cards"
+        }
     }
+
+    
 } 
 
 
@@ -25,7 +35,26 @@ local Joker_Info  = {
         '',
         '7thBeat',
         nil
-    )
+    ),
+
+    fireAndIce = SMODS.Joker:new(
+        "A Dance of Fire and Ice",
+        "A Dance of Fire and Ice",
+        {extra = {chips=0}},
+        {x = 0, y = 0},
+        jokers_def.fireAndIce,
+        3,
+        7, 
+        true,
+        true,
+        true,
+        true, 
+        '',
+        'fireAndIce',
+        nil
+    ),
+
+    
 }
 
 
@@ -35,10 +64,16 @@ init_localization()
 
 SMODS.Sprite:new("7thBeat", SMODS.findModByID("VGRMod").path.."JoshDoesStuff/", "onThe7thBeat.png", 71, 95, "asset_atli"):register()
 
+SMODS.Sprite:new("fireAndIce", SMODS.findModByID("VGRMod").path.."JoshDoesStuff/", "fireAndIce.png", 71, 95, "asset_atli"):register()
+
 seventally = 1
+sevenHands = 1
 
 function Joker_Info.seventh_beat.loc_def(center)
-   
+
+end
+
+function Joker_Info.fireAndIce.loc_def(center)
 
 end
 
@@ -79,6 +114,18 @@ Joker_Info.seventh_beat.calculate = function(self, context)
     end 
 end
 
-    
+
+Joker_Info.fireAndIce.calculate = function(self, context)
+    if context.joker_main then
+        if sevenHands == 7 then
+        
+        end
+        else 
+
+        sevenHands = (sevenHands + 1)
+        
+
+    end
+end
 
 return Joker_Info
