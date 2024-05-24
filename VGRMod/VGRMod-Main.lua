@@ -83,7 +83,26 @@ function SMODS.INIT.VGRMod_Main()
 				"from",
 				"{C:attention}Rhythm Doctor"
 			}
-		}
+		},
+
+		adofai_ref = {
+			name = "ADOFAI Reference",
+			text = {
+				"This Joker is",
+				"from",
+				"{C:attention}A Dance of Fire and Ice"
+			},
+		},
+
+		scrungle_ref = {
+			name = "Get Scrungled, Idiot",
+			text = {
+				"From an Inside Joke",
+				"I mean, an unreleased video game",
+				"This is totally on topic for the mod",
+				"I swear"
+			}
+		},
 	}
 
 	local function init_game_ref_tooltips()

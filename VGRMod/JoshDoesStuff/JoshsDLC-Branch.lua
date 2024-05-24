@@ -13,7 +13,14 @@ local jokers_def =  {
             "After every {C:attention}7th{} hand played",
             "This card generates {C:attention}2 planet cards"
         }
-    }
+    },
+
+    scrungle = {
+        ["name"] = "SCRUNGLE",
+        ["text"] = {
+            "Colby will lobotomize you",
+        }
+    },
 
     
 } 
@@ -54,6 +61,23 @@ local Joker_Info  = {
         nil
     ),
 
+    scrungle = SMODS.Joker:new(
+        "Scrungle",
+        "Srcungle",
+        {extra = {chips=0}},
+        {x = 0, y = 0},
+        jokers_def.scrungle,
+        4,
+        0,
+        true,
+        true,
+        true,
+        true,
+        '',
+        'scrungle',
+        nil
+    )
+
     
 }
 
@@ -65,6 +89,8 @@ init_localization()
 SMODS.Sprite:new("7thBeat", SMODS.findModByID("VGRMod").path.."JoshDoesStuff/", "onThe7thBeat.png", 71, 95, "asset_atli"):register()
 
 SMODS.Sprite:new("fireAndIce", SMODS.findModByID("VGRMod").path.."JoshDoesStuff/", "fireAndIce.png", 71, 95, "asset_atli"):register()
+
+SMODS.Sprite:new("scrungle", SMODS.findModByID("VGRMod").path.."JoshDoesStuff/", "scrungle.png", 71, 95, "asset_atli"):register()
 
 seventally = 1
 sevenHands = 1
@@ -80,6 +106,15 @@ end
 function Joker_Info.seventh_beat.tooltip(card, info_queue)
 	info_queue[#info_queue+1] = {set = 'Other', key = 'rd_ref'}
 end
+
+function Joker_Info.fireAndIce.tooltip(card, info_queue)
+	info_queue[#info_queue+1] = {set = 'Other', key = 'adofai_ref'}
+end
+
+function Joker_Info.scrungle.tooltip(card, info_queue)
+	info_queue[#info_queue+1] = {set = 'Other', key = 'scrungle_ref'}
+end
+
 
 
 Joker_Info.seventh_beat.calculate = function(self, context)
@@ -116,16 +151,76 @@ end
 
 
 Joker_Info.fireAndIce.calculate = function(self, context)
+    if context.individual then
+        if context.cardarea == G.play then
+            return {
+                
+            }
+        end
+    end
     if context.joker_main then
         if sevenHands == 7 then
-        
-        end
-        else 
 
-        sevenHands = (sevenHands + 1)
-        
+        print("hit 7")
+        return {
+            -- message = localize{type='variable', key='a_chips', vars={self.ability.extra.chips}},
+            
+        } 
 
+        else
+        
+        sevenHands = sevenHands + 1
+
+        print(sevenHands)
+
+        return {
+             message = nil
+        } 
     end
+    end 
 end
+
+
+
+Joker_Info.scrungle.calculate = function(self, context)
+
+    -- Shamelessly stolen from betma jokers code, because I have no clue how to do this but I needed it done for an assignment
+    -- TODO:// Rewrite this in my own code. 
+
+    if self.ability.name == "Scrungle" and context.joker_main then 
+        self.ability.extra.added_to_deck = true --not the right place for this but eh
+                G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
+                    play_sound('tarot1')
+                    return true end }))
+                for i=1, #G.hand.cards do
+                    local percent = 1.15 - (i-0.999)/(#G.hand.cards-0.998)*0.3
+                    G.E_MANAGER:add_event(Event({trigger = 'after',delay = 0.4,func = function() G.hand.cards[i]:flip();play_sound('card1', percent);G.hand.cards[i]:juice_up(0.3, 0.3);return true end }))
+                end
+    
+                delay(0.5)
+                G.E_MANAGER:add_event(Event({
+                    func = function() 
+                        for i=1, #G.playing_cards do
+                            local card = G.playing_cards[i]
+                            local cen_pool = {}
+                            for k, v in pairs(G.P_CENTER_POOLS["Enhanced"]) do
+                                cen_pool[#cen_pool+1] = v
+                            end
+                            center = pseudorandom_element(cen_pool, pseudoseed('spe_card'))
+
+                            card:set_ability(center, nil, true)
+                        end  
+                        return true
+                    end}))
+                
+                for i=1, #G.hand.cards do
+                    local percent = 0.85 + (i-0.999)/(#G.hand.cards-0.998)*0.3
+                    G.E_MANAGER:add_event(Event({trigger = 'after',delay = 0.4,func = function() G.hand.cards[i]:flip();play_sound('tarot2', percent, 0.6);G.hand.cards[i]:juice_up(0.3, 0.3);return true end }))
+                end
+                delay(0.5)                
+
+
+            end
+        end
 
 return Joker_Info
