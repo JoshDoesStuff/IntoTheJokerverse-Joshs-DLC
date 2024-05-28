@@ -22,6 +22,13 @@ local jokers_def =  {
         }
     },
 
+    salvation = {
+        ["name"] = "We, Are Your Salvation",
+        ["text"] =  {"{C:attention}Prevents{} a game over",
+        "Unless current blind is a {C:attention}Boss Blind{}",
+        },
+    }
+
     
 } 
 
@@ -67,7 +74,7 @@ local Joker_Info  = {
         {extra = {chips=0}},
         {x = 0, y = 0},
         jokers_def.scrungle,
-        4,
+        3,
         0,
         true,
         true,
@@ -76,7 +83,24 @@ local Joker_Info  = {
         '',
         'scrungle',
         nil
-    )
+    ),
+
+    salvation = SMODS.Joker:new(
+        "Salvation",
+        "Salvation",
+        {extra = {chips = 0}},
+        {x = 0, y = 0},
+        jokers_def.salvation,
+        4,
+        7,
+        true,
+        true,
+        false,
+        false,
+        '',
+        'salvation',
+        nil
+    ),
 
     
 }
@@ -124,6 +148,8 @@ SMODS.Sprite:new("fireAndIce", SMODS.findModByID("VGRMod").path.."JoshDoesStuff/
 
 SMODS.Sprite:new("scrungle", SMODS.findModByID("VGRMod").path.."JoshDoesStuff/", "scrungle.png", 71, 95, "asset_atli"):register()
 
+SMODS.Sprite:new("salvation", SMODS.findModByID("VGRMod").path.."JoshDoesStuff/", "salvation.png", 71, 95, "asset_atli"):register()
+
 seventally = 1
 sevenHands = 1
 
@@ -157,7 +183,7 @@ Joker_Info.seventh_beat.calculate = function(self, context)
                 print('upgraded')
                 self.ability.extra.chips = self.ability.extra.chips + self.ability.extra.chip_mod
                 return {
-                    extra = {focus = self, message = localize('k_upgrade_ex')},
+                    extra = {focus = self, message = localize('k_sevenUpgrade')},
                     card = self,
                     color = G.C.CHIPS
                 }
@@ -185,21 +211,17 @@ end
 Joker_Info.fireAndIce.calculate = function(self, context)
     if context.individual then
         if context.cardarea == G.play then
-            return {
-                
-            }
         end
     end
     if context.joker_main then
         if sevenHands == 7 then
-
-        print("hit 7")
         
         create_planet(self, _planet, aurora_borealis)
         create_planet(self)
 
+        sevenHands = 1
+
         else
-        
         sevenHands = sevenHands + 1
 
         print(sevenHands)
