@@ -173,6 +173,9 @@ function Joker_Info.scrungle.tooltip(card, info_queue)
 	info_queue[#info_queue+1] = {set = 'Other', key = 'scrungle_ref'}
 end
 
+function Joker_Info.salvation.tooltip(card, info_queue)
+	info_queue[#info_queue+1] = {set = 'Other', key = 'destiny_ref'}
+end
 
 
 Joker_Info.seventh_beat.calculate = function(self, context)
@@ -274,6 +277,28 @@ Joker_Info.scrungle.calculate = function(self, context)
 
             end
         end
+
+
+
+Joker_Info.salvation.calculate = function(self, context)
+
+    if self.ability.name == "Salvation" and not G.GAME.blind.boss then
+        self.debuff = false
+        if context.game_over then
+        return {
+            message = localize('k_saved_ex'),
+            saved = true,
+            colour = G.C.RED
+        }
+    end
+end
+
+    
+    if self.ability.name == "Salvation" and G.GAME.blind.boss then
+        self.debuff = true
+    end
+end
+
 
 return Joker_Info
 

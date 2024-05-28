@@ -79,8 +79,7 @@ function SMODS.INIT.VGRMod_Main()
 		rd_ref = {
 			name = "Rhythm Doctor Refrence",
 			text = {
-				"This Joker is",
-				"from",
+				"This Joker is from",
 				"{C:attention}Rhythm Doctor"
 			}
 		},
@@ -88,8 +87,7 @@ function SMODS.INIT.VGRMod_Main()
 		adofai_ref = {
 			name = "ADOFAI Reference",
 			text = {
-				"This Joker is",
-				"from",
+				"This Joker is from",
 				"{C:attention}A Dance of Fire and Ice"
 			},
 		},
@@ -103,6 +101,14 @@ function SMODS.INIT.VGRMod_Main()
 				"I swear"
 			}
 		},
+		
+		destiny_ref = {
+			name = "Destiny 1/2 Reference",
+			text = {
+				"This Joker is from",
+				"{C:attention}Destiny 1/2{}",
+			}
+		}
 	}
 
 	local function init_game_ref_tooltips()
