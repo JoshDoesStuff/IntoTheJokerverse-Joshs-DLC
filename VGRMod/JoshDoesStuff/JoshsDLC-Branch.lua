@@ -27,6 +27,14 @@ local jokers_def =  {
         ["text"] =  {"{C:attention}Prevents{} a game over",
         "Unless current blind is a {C:attention}Boss Blind{}",
         },
+    },
+
+    destruction = {
+        ["name"] = "DESTRUCTION 3,2,1",
+        ["text"] = {
+            "Gives every {C:attention}3, 2, or Ace{} played",
+            "This card gains +3, 2 or 1 {C:chips}chips{} and {C:mult}mult{}",
+        }
     }
 
     
@@ -102,9 +110,39 @@ local Joker_Info  = {
         nil
     ),
 
+    destruction = SMODS.Joker:new(
+        "Destruction",
+        "Destruction",
+        {extra = {chips = 0, mult = 0}},
+        {x = 0, y = 0},
+        jokers_def.destruction,
+        3,
+        3.21,
+        true,
+        true,
+        true,
+        true,
+        '',
+        'destruction',
+        nil
+
+    )
+
     
 }
 
+function eval_this(_card, effects)
+    if effects then 
+        local extras = {mult = false, hand_chips = false}
+        if effects.mult_mod then mult = mod_mult(mult + effects.mult_mod);extras.mult = true end
+        if effects.chip_mod then hand_chips = mod_chips(hand_chips + effects.chip_mod);extras.hand_chips = true end
+        if effects.Xmult_mod then mult = mod_mult(mult*effects.Xmult_mod);extras.mult = true  end
+        update_hand_text({delay = 0}, {chips = extras.hand_chips and hand_chips, mult = extras.mult and mult})
+        if effects.message then
+            card_eval_status_text(_card, 'jokers', nil, nil, nil, effects)
+        end
+    end
+end
 
 local function create_planet(joker, planet, other_joker)
     if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
@@ -150,8 +188,12 @@ SMODS.Sprite:new("scrungle", SMODS.findModByID("VGRMod").path.."JoshDoesStuff/",
 
 SMODS.Sprite:new("salvation", SMODS.findModByID("VGRMod").path.."JoshDoesStuff/", "salvation.png", 71, 95, "asset_atli"):register()
 
+SMODS.Sprite:new("destruction", SMODS.findModByID("VGRMod").path.."JoshDoesStuff/", "destruction.png", 71, 95, "asset_atli"):register()
+
 seventally = 1
 sevenHands = 1
+salesman = math.random(1997)
+secondPhase = false
 
 function Joker_Info.seventh_beat.loc_def(center)
 
@@ -299,7 +341,55 @@ end
     end
 end
 
+Joker_Info.destruction.calculate = function(self, context)
+    if context.individual then
+    if self.ability.name == 'Destruction' and context.other_card:get_id() == 2 and not context.blueprint then
+        
+        self.ability.extra.chips = self.ability.extra.chips + 2
+        self.ability.extra.mult = self.ability.extra.mult + 2
 
+        return {
+            extra = {focus = self, message = localize('k_upgrade_ex')},
+            card = self,
+            colour = G.C.CHIPS ,
+            extra = {focus = self, message = localize('k_upgrade_ex')},
+            card = self,
+            colour = G.C.MULT
+    }   
+end
+if context.individual then
+    if self.ability.name == 'Destruction' and context.other_card:get_id() == 2 and not context.blueprint then
+        
+        self.ability.extra.chips = self.ability.extra.chips + 3
+        self.ability.extra.mult = self.ability.extra.mult + 3
+
+        return {
+            extra = {focus = self, message = localize('k_upgrade_ex')},
+            card = self,
+            colour = G.C.CHIPS, 
+            extra = {focus = self, message = localize('k_upgrade_ex')},
+            card = self,
+            colour = G.C.MULT
+    }   
+end
+    if self.ability.name == 'Destruction' and context.joker_main then
+    salesman = math.random(1997)
+end
+end
+end
+
+if context.joker_main then 
+    
+    return {
+        message = localize{type='variable', key='a_chips', vars={self.ability.extra.chips}},
+        chip_mod = self.ability.extra.chips,
+        mult_mod = self.ability.extra.mult,
+        card = self,
+        colour = G.C.CHIPS,
+    }
+
+end
+end
 return Joker_Info
 
 
