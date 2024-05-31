@@ -342,54 +342,37 @@ end
 end
 
 Joker_Info.destruction.calculate = function(self, context)
-    if context.individual then
-    if self.ability.name == 'Destruction' and context.other_card:get_id() == 2 and not context.blueprint then
-        
-        self.ability.extra.chips = self.ability.extra.chips + 2
-        self.ability.extra.mult = self.ability.extra.mult + 2
 
+    -- Shoutout to Eremel (eremel_) in the balatro discord who helped write this card
+
+
+    if context.cardarea == G.play and context.individual and not context.repetition and not context.blueprint then
+        local increment = (context.other_card:get_id() == 2 and 2 or context.other_card:get_id() == 3 and 3 or context.other_card:get_id() == 14 and 1 or nil)
+        if increment then
+            sendDebugMessage(increment)
+            self.ability.extra.chips = self.ability.extra.chips + increment
+            self.ability.extra.mult = self.ability.extra.mult + increment
+            card_eval_status_text(self, 'extra', nil, nil, nil, { message = 'Upgrade!', colour = G.C.GREEN});
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    self:juice_up()
+                    return true
+                end
+            }))
+        end
+    end
+    if context.joker_main then
+        card_eval_status_text(self, 'extra', nil, nil, nil, { message = tostring("+" .. self.ability.extra.chips .. " Chips"), colour = G.C.CHIPS});
         return {
-            extra = {focus = self, message = localize('k_upgrade_ex')},
+            message = localize{type='variable', key='a_mult', vars={self.ability.extra.mult}},
+            chip_mod = self.ability.extra.chips,
+            mult_mod = self.ability.extra.mult,
             card = self,
-            colour = G.C.CHIPS ,
-            extra = {focus = self, message = localize('k_upgrade_ex')},
-            card = self,
-            colour = G.C.MULT
-    }   
-end
-if context.individual then
-    if self.ability.name == 'Destruction' and context.other_card:get_id() == 2 and not context.blueprint then
-        
-        self.ability.extra.chips = self.ability.extra.chips + 3
-        self.ability.extra.mult = self.ability.extra.mult + 3
-
-        return {
-            extra = {focus = self, message = localize('k_upgrade_ex')},
-            card = self,
-            colour = G.C.CHIPS, 
-            extra = {focus = self, message = localize('k_upgrade_ex')},
-            card = self,
-            colour = G.C.MULT
-    }   
-end
-    if self.ability.name == 'Destruction' and context.joker_main then
-    salesman = math.random(1997)
-end
-end
+            colour = G.C.RED,
+        }
+    end 
 end
 
-if context.joker_main then 
-    
-    return {
-        message = localize{type='variable', key='a_chips', vars={self.ability.extra.chips}},
-        chip_mod = self.ability.extra.chips,
-        mult_mod = self.ability.extra.mult,
-        card = self,
-        colour = G.C.CHIPS,
-    }
-
-end
-end
 return Joker_Info
 
 
