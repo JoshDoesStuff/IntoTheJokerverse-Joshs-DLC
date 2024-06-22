@@ -43,20 +43,20 @@ local jokers_def =  {
 
 local Joker_Info  = {
     seventh_beat = SMODS.Joker:new(
-        "On The 7th beat",
-        "On The 7th beat",
-        {extra = {chips = 0, chip_mod = 7}},
+        "On The 7th beat",  -- name
+        "On The 7th beat", -- idk
+        {extra = {chips = 0, chip_mod = 7}}, -- stats
         {x = 0, y = 0},
-        jokers_def.seventh_beat,
-        2,
-        7,
-        true,
-        true,
-        true,
-        true,
-        '',
-        '7thBeat',
-        nil
+        jokers_def.seventh_beat, -- defenition
+        2, -- rarity
+        7, -- cost
+        true, -- some flags idk
+        true, -- some flags idk
+        true, -- some flags idk
+        true, -- some flags idk
+        '', -- idk man
+        '7thBeat', -- texture atlas
+        nil -- idk
     ),
 
     fireAndIce = SMODS.Joker:new(

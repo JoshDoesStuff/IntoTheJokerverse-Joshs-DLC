@@ -80,7 +80,8 @@ function SMODS.INIT.VGRMod_Main()
 			name = "Rhythm Doctor Refrence",
 			text = {
 				"This Joker is from",
-				"{C:attention}Rhythm Doctor"
+				"{C:attention}Rhythm Doctor",
+				"Art by 	JoshDoesStuff"
 			}
 		},
 
@@ -88,7 +89,8 @@ function SMODS.INIT.VGRMod_Main()
 			name = "ADOFAI Reference",
 			text = {
 				"This Joker is from",
-				"{C:attention}A Dance of Fire and Ice"
+				"{C:attention}A Dance of Fire and Ice",
+				"Art By JoshDoesStuff"
 			},
 		},
 
@@ -98,7 +100,8 @@ function SMODS.INIT.VGRMod_Main()
 				"From an Inside Joke",
 				"I mean, an unreleased video game",
 				"This is totally on topic for the mod",
-				"I swear"
+				"I swear",
+				"Art by JoshDoesStuff"
 			}
 		},
 		
@@ -107,6 +110,16 @@ function SMODS.INIT.VGRMod_Main()
 			text = {
 				"This Joker is from",
 				"{C:attention}Destiny 1/2{}",
+				"Art by EndarFY"
+			}
+		},
+		
+		phigros_ref = {
+			name = "Phigros Reference",
+			text = {
+				"This Joker is from",
+				"{C:attention}Phigros",
+				"Art by EndarFY"
 			}
 		}
 	}
